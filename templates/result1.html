@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Result</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <script src="/static/script.js"></script>
+</head>
+<body>
+    <div class="main1">
+        <h2>Quiz Result</h2>
+        <img class="turn" src="/static/gif/report.gif" alt="" srcset="">
+        <p class="totalscore">You scored {{ score }} out of {{ total }}.</p>
+        <div class="answers">
+            {% for index, question in enumerate(questions) %}
+            {% if user_answers[index] != question.answer %}
+                <div class="Qcontainer" style="box-shadow: 0 0 20px red;">
+                {% else %}
+                <div class="Qcontainer">
+                {% endif %}
+            
+                <h3><strong>Question {{ index + 1 }}:</strong> {{ question.question }}</h3>
+                <p><strong>Your Answer:</strong> {{ user_answers[index] }}</p>
+                {% if user_answers[index] != question.answer %}
+                    <p><strong>Correct Answer:</strong> {{ question.answer }}</p>
+                {% endif %}
+            </div>
+            {% endfor %}
+        </div>
+        <button class="tryagain" onclick="redirectToPage('/')">Try Again?</button>
+    </div>
+</body>
+</html>
